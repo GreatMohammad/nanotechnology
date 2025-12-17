@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 0: Nanotechnology Safety Protocols</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #222;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: #2c3e50;
+            color: #fff;
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .nav-progress {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            width: 0%;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .content-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .content-card.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 2em;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #34495e;
+            margin: 25px 0 15px 0;
+            font-size: 1.5em;
+        }
+
+        .safety-warning {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .safety-critical {
+            background: #f8d7da;
+            border-left: 5px solid #dc3545;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .info-box {
+            background: #d1ecf1;
+            border-left: 5px solid #17a2b8;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .ppe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .ppe-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #dee2e6;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .ppe-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .ppe-item h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .checklist {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .checklist-item {
+            padding: 15px;
+            margin: 10px 0;
+            background: #fff;
+            border-radius: 5px;
+            border-left: 4px solid #dee2e6;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .checklist-item:hover {
+            border-left-color: #3498db;
+        }
+
+        .checklist-item.checked {
+            border-left-color: #2ecc71;
+            background: #d4edda;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            margin-right: 15px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .quiz-section {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .quiz-question {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .quiz-options {
+            margin: 15px 0;
+        }
+
+        .quiz-option {
+            padding: 12px;
+            margin: 8px 0;
+            background: #fff;
+            border: 2px solid #dee2e6;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            background: #e9ecef;
+            border-color: #3498db;
+        }
+
+        .quiz-option.correct {
+            background: #d4edda;
+            border-color: #2ecc71;
+        }
+
+        .quiz-option.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 10px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: #95a5a6;
+            color: #fff;
+        }
+
+        .btn-secondary:hover {
+            background: #7f8c8d;
+        }
+
+        button:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .emergency-procedures {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .emergency-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            border-top: 4px solid #dc3545;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .emergency-card h4 {
+            color: #dc3545;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        .completion-badge {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .completion-badge h3 {
+            color: #fff;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .ppe-grid, .emergency-procedures {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+            }
+        }
+
+        /* Accessibility improvements */
+        *:focus {
+            outline: 3px solid #3498db;
+            outline-offset: 2px;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Lab 0: Nanotechnology Safety Protocols</h1>
+            <p>Essential Safety Training for Low-Cost Nanotechnology Labs</p>
+        </header>
+
+        <div class="nav-progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-fill" id="progressFill">0%</div>
+            </div>
+        </div>
+
+        <!-- Section 1: Introduction -->
+        <div class="content-card active" id="section1">
+            <h2>Welcome to Lab Safety Training</h2>
+            
+            <div class="info-box">
+                <h3>About This Training</h3>
+                <p>This comprehensive safety module is designed to prepare you for hands-on work in nanotechnology laboratories. While the labs in this manual are designed to be low-cost and accessible, <strong>safety remains our top priority</strong>.</p>
+            </div>
+
+            <h3>Why Safety Matters in Nanotechnology</h3>
+            <p>Nanotechnology labs involve unique hazards including:</p>
+            <ul>
+                <li><strong>Chemical exposure</strong> - Working with etchants, solvents, and reactive materials</li>
+                <li><strong>High-temperature equipment</strong> - Hotplates, thermal evaporation systems, and plasma generation</li>
+                <li><strong>Vacuum systems</strong> - Potential implosion hazards and pressure differentials</li>
+                <li><strong>Electrical hazards</strong> - Power supplies, UV exposure systems, and electrodeposition</li>
+                <li><strong>Mechanical hazards</strong> - Rotating equipment, high-speed fans, and cutting tools</li>
+            </ul>
+
+            <div class="safety-critical">
+                <h3>⚠️ Critical Safety Principle</h3>
+                <p><strong>Nearly all labs have some level of risk involved in their completion, however this risk is minimal when proper lab safety protocols are followed.</strong></p>
+                <p>Your safety depends on understanding hazards, following procedures, and maintaining awareness at all times.</p>
+            </div>
+
+            <h3>Learning Objectives</h3>
+            <p>By completing this safety training, you will be able to:</p>
+            <ol>
+                <li>Identify appropriate Personal Protective Equipment (PPE) for different lab activities</li>
+                <li>Understand chemical safety protocols and handling procedures</li>
+                <li>Recognize electrical and mechanical hazards</li>
+                <li>Follow proper emergency response procedures</li>
+                <li>Apply general laboratory safety best practices</li>
+            </ol>
+        </div>
+
+        <!-- Section 2: Personal Protective Equipment -->
+        <div class="content-card" id="section2">
+            <h2>Personal Protective Equipment (PPE)</h2>
+
+            <div class="info-box">
+                <p><strong>PPE is your first line of defense</strong> against laboratory hazards. The specific PPE required varies by lab activity, but certain items are standard across all experiments.</p>
+            </div>
+
+            <h3>Standard PPE Requirements</h3>
+            
+            <div class="ppe-grid">
+                <div class="ppe-item" tabindex="0">
+                    <h4>👓 Safety Glasses/Goggles</h4>
+                    <p><strong>Required:</strong> All labs</p>
+                    <p><strong>Purpose:</strong> Protect eyes from chemical splashes, flying particles, and UV radiation</p>
+                    <p><strong>Standards:</strong> ANSI Z87.1 certified</p>
+                    <p><strong>Note:</strong> Chemical splash goggles required for Labs 4, 7, 8, 9, 10</p>
+                </div>
+
+                <div class="ppe-item" tabindex="0">
+                    <h4>🧤 Gloves</h4>
+                    <p><strong>Required:</strong> Labs 4, 6, 7, 8, 9, 10</p>
+                    <p><strong>Purpose:</strong> Protect hands from chemicals, hot surfaces, and contamination</p>
+                    <p><strong>Types:</strong></p>
+                    <ul>
+                        <li>Nitrile gloves for chemical handling</li>
+                        <li>Heat-resistant gloves for hot equipment</li>
+                        <li>Chemical-resistant gloves for acids/bases (Labs 7, 8, 9, 10)</li>
+                    </ul>
+                </div>
+
+                <div class="ppe-item" tabindex="0">
+                    <h4>🥼 Lab Coat/Long Sleeves</h4>
+                    <p><strong>Required:</strong> Labs 4, 6, 7, 8, 9, 10</p>
+                    <p><strong>Purpose:</strong> Protect skin and clothing from chemical splashes and contamination</p>
+                    <p><strong>Guidelines:</strong></p>
+                    <ul>
+                        <li>Cotton or flame-resistant material preferred</li>
+                        <li>Must cover arms completely</li>
+                        <li>Button or snap closures (not loose)</li>
+                    </ul>
+                </div>
+
+                <div class="ppe-item" tabindex="0">
+                    <h4>👟 Closed-Toe Shoes</h4>
+                    <p><strong>Required:</strong> All labs</p>
+                    <p><strong>Purpose:</strong> Protect feet from spills, dropped equipment, and glass breakage</p>
+                    <p><strong>Guidelines:</strong></p>
+                    <ul>
+                        <li>No sandals, flip-flops, or open-toe shoes</li>
+                        <li>Non-slip soles recommended</li>
+                    </ul>
+                </div>
+
+                <div class="ppe-item" tabindex="0">
+                    <h4>😷 Respirator (Optional)</h4>
+                    <p><strong>Required:</strong> If fume hood unavailable for Labs 4, 6, 7, 8</p>
+                    <p><strong>Purpose:</strong> Protect respiratory system from chemical vapors and particulates</p>
+                    <p><strong>Note:</strong> Must be properly fitted and appropriate for chemicals in use</p>
+                </div>
+
+                <div class="ppe-item" tabindex="0">
+                    <h4>🦺 Apron</h4>
+                    <p><strong>Required:</strong> Labs 9, 10 (electrochemistry)</p>
+                    <p><strong>Purpose:</strong> Additional protection from corrosive chemicals</p>
+                    <p><strong>Material:</strong> Chemical-resistant material for acid/base work</p>
+                </div>
+            </div>
+
+            <div class="safety-warning">
+                <h3>⚠️ UV Protection Requirements</h3>
+                <p>Labs 6 and 8 involve UV exposure systems for photolithography. <strong>Never look directly at UV light during exposure without UV-protecting eyewear/glasses.</strong> Standard safety glasses may not provide adequate UV protection for these wavelengths.</p>
+            </div>
+        </div>
+
+        <!-- Section 3: Chemical Safety -->
+        <div class="content-card" id="section3">
+            <h2>Chemical Safety</h2>
+
+            <h3>Common Laboratory Chemicals</h3>
+            <p>The following chemicals are used throughout the lab manual. Understanding their hazards is essential:</p>
+
+            <div class="emergency-procedures">
+                <div class="emergency-card">
+                    <h4>Acetone</h4>
+                    <p><strong>Used in:</strong> Labs 6, 7, 8 (cleaning/developing)</p>
+                    <p><strong>Hazards:</strong> Flammable, volatile, irritant</p>
+                    <p><strong>Safety:</strong></p>
+                    <ul>
+                        <li>Use in well-ventilated area</li>
+                        <li>No open flames nearby</li>
+                        <li>Avoid skin contact</li>
+                    </ul>
+                </div>
+
+                <div class="emergency-card">
+                    <h4>Isopropyl Alcohol (IPA)</h4>
+                    <p><strong>Used in:</strong> Labs 6, 7, 8, 10</p>
+                    <p><strong>Hazards:</strong> Flammable, eye/skin irritant</p>
+                    <p><strong>Safety:</strong></p>
+                    <ul>
+                        <li>Keep away from heat sources</li>
+                        <li>Use in ventilated area</li>
+                        <li>Rinse immediately if contact occurs</li>
+                    </ul>
+                </div>
+
+                <div class="emergency-card">
+                    <h4>Ferric Chloride (Iron III Chloride)</h4>
+                    <p><strong>Used in:</strong> Labs 7, 8 (wet etching)</p>
+                    <p><strong>Hazards:</strong> Corrosive, causes skin burns, stains</p>
+                    <p><strong>Safety:</strong></p>
+                    <ul>
+                        <li>Wear chemical-resistant gloves</li>
+                        <li>Use under fume hood if possible</li>
+                        <li>Dilute as directed by instructor</li>
+                    </ul>
+                </div>
+
+                <div class="emergency-card">
+                    <h4>Hydrogen Tetrachloroaurate (HAuCl₄)</h4>
+                    <p><strong>Used in:</strong> Labs 9, 10 (gold deposition)</p>
+                    <p><strong>Hazards:</strong> Corrosive, severe eye damage</p>
+                    <p><strong>Safety:</strong></p>
+                    <ul>
+                        <li>Chemical splash goggles required</li>
+                        <li>Chemical-resistant gloves mandatory</li>
+                        <li>Instructor should prepare solution</li>
+                    </ul>
+                </div>
+
+                <div class="emergency-card">
+                    <h4>Sodium Hydroxide (NaOH)</h4>
+                    <p><strong>Used in:</strong> Lab 10</p>
+                    <p><strong>Hazards:</strong> Strong base, corrosive</p>
+                    <p><strong>Safety:</strong></p>
+                    <ul>
+                        <li>Causes severe burns</li>
+                        <li>Use extreme caution</li>
+                        <li>Rinse immediately if contact occurs</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="safety-critical">
+                <h3>🚨 Critical Chemical Safety Rules</h3>
+                <ol>
+                    <li><strong>Read Safety Data Sheets (SDS)</strong> before handling any chemical</li>
+                    <li><strong>Never pipette by mouth</strong> - always use pipette bulbs or pumps</li>
+                    <li><strong>Add acid to water</strong>, never water to acid</li>
+                    <li><strong>Label all containers</strong> immediately after transferring chemicals</li>
+                    <li><strong>Dispose properly</strong> - never pour chemicals down the drain unless approved</li>
+                    <li><strong>Work in ventilated areas</strong> - use fume hoods when available</li>
+                    <li><strong>Report all spills</strong> immediately, no matter how small</li>
+                </ol>
+            </div>
+
+            <h3>Chemical Spill Response</h3>
+            <div class="checklist">
+                <div class="checklist-item">
+                    <input type="checkbox" id="spill1" aria-label="Alert others">
+                    <label for="spill1">1. Alert others in the area and instructor</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="spill2" aria-label="Contain spill">
+                    <label for="spill2">2. Contain the spill if safe to do so</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="spill3" aria-label="Ventilate area">
+                    <label for="spill3">3. Ventilate the area</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="spill4" aria-label="Use spill kit">
+                    <label for="spill4">4. Use appropriate spill kit materials</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="spill5" aria-label="Dispose properly">
+                    <label for="spill5">5. Dispose of cleanup materials properly</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="spill6" aria-label="Wash hands">
+                    <label for="spill6">6. Wash hands thoroughly after cleanup</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Equipment-Specific Safety -->
+        <div class="content-card" id="section4">
+            <h2>Equipment-Specific Safety</h2>
+
+            <h3>Vacuum Systems (Labs 2, 3, 4, 5)</h3>
+            
+            <div class="safety-warning">
+                <h4>Implosion Hazard</h4>
+                <p>Vacuum systems create significant pressure differentials. Glassware under vacuum can implode if:</p>
+                <ul>
+                    <li>Glass has cracks or defects</li>
+                    <li>Temperature changes too rapidly</li>
+                    <li>Pressure exceeds rated limits</li>
+                </ul>
+                <p><strong>Prevention:</strong> Always inspect glassware before use. Wear safety glasses. Never exceed temperature limits.</p>
+            </div>
+
+            <div class="info-box">
+                <h4>Safe Operating Procedures</h4>
+                <ul>
+                    <li>System must be operated in dry environment</li>
+                    <li>Keep fingers clear when tightening screws/clamps</li>
+                    <li>Two people should lift heavy systems</li>
+                    <li>Never lean against or push the system</li>
+                    <li>Allow system to cool before handling after plasma/heating operations</li>
+                </ul>
+            </div>
+
+            <h3>High-Temperature Equipment (Labs 4, 5, 6, 7, 8)</h3>
+            
+            <div class="safety-critical">
+                <h4>🔥 Burn Prevention</h4>
+                <p>Multiple labs involve hotplates and heating elements reaching 155°C (311°F) or higher:</p>
+                <ul>
+                    <li><strong>Lab 4 (Plasma):</strong> Flask can exceed 750°F - wait minimum 5 minutes to cool</li>
+                    <li><strong>Lab 5 (Thermal Evaporation):</strong> Heating elements and substrates become very hot</li>
+                    <li><strong>Labs 6, 7, 8:</strong> Hotplates at 155°C for baking steps</li>
+                </ul>
+                
+                <p><strong>Safety Measures:</strong></p>
+                <ul>
+                    <li>Always use heat-resistant gloves or forceps to handle hot items</li>
+                    <li>Never touch glass or metal that has been heated without testing temperature first</li>
+                    <li>Allow adequate cooling time as specified in procedures</li>
+                    <li>Keep flammable materials away from hot surfaces</li>
+                    <li>Know the location of burn treatment supplies</li>
+                </ul>
+            </div>
+
+            <h3>Plasma Systems (Lab 4)</h3>
+            
+            <div class="safety-critical">
+                <h4>⚠️ Critical Plasma Safety</h4>
+                <p><strong>Lab 4 creates plasma using a microwave and vacuum system. This involves multiple hazards:</strong></p>
+                
+                <p><strong>Implosion Risk:</strong></p>
+                <ul>
+                    <li>Pressure between 80-120 mTorr can create plasma exceeding 750°F</li>
+                    <li>This can cause flask meltdown and implosion</li>
+                    <li>Keep pressure below 50 mTorr or above 120 mTorr</li>
+                    <li>Never exceed 30 seconds total application time</li>
+                </ul>
+
+                <p><strong>Inhalation Hazard:</strong></p>
+                <ul>
+                    <li>Plasma generates free radicals and reactive species</li>
+                    <li>Must be performed under fume hood</li>
+                    <li>Wait for cooling before opening chamber</li>
+                </ul>
+
+                <p><strong>Eye Protection:</strong></p>
+                <ul>
+                    <li>Wear safety glasses when observing plasma</li>
+                    <li>Never stare directly at bright plasma</li>
+                </ul>
+            </div>
+
+            <h3>UV Exposure Systems (Labs 6, 8)</h3>
+            
+            <div class="safety-warning">
+                <h4>UV Radiation Hazard</h4>
+                <p>UV nail curing systems are used for photolithography exposure. UV radiation can damage eyes and skin.</p>
+                
+                <p><strong>Protection Required:</strong></p>
+                <ul>
+                    <li>Never look directly at UV light during exposure</li>
+                    <li>UV-protecting eyewear required when observing</li>
+                    <li>Minimize skin exposure to UV</li>
+                    <li>Follow exposure time limits strictly</li>
+                </ul>
+            </div>
+
+            <h3>Spin Coating (Labs 6, 8)</h3>
+            
+            <div class="info-box">
+                <h4>Rotating Equipment Safety</h4>
+                <ul>
+                    <li>Keep hands clear of spinning fan/coater</li>
+                    <li>Secure substrate properly before spinning</li>
+                    <li>Wear safety glasses - droplets may fly off</li>
+                    <li>Perform in well-ventilated area (solvents evaporate)</li>
+                    <li>Allow fan to stop completely before approaching</li>
+                </ul>
+            </div>
+
+            <h3>Electrochemical Systems (Labs 9, 10)</h3>
+            
+            <div class="safety-warning">
+                <h4>Electrical and Chemical Hazards</h4>
+                <p>Electrodeposition combines electrical current with corrosive chemicals:</p>
+                
+                <p><strong>Electrical Safety:</strong></p>
+                <ul>
+                    <li>Inspect wires and connections before use</li>
+                    <li>Keep electrical components away from water/spills</li>
+                    <li>Never touch electrodes while power is on</li>
+                    <li>Disconnect power before handling electrodes</li>
+                </ul>
+
+                <p><strong>Chemical Safety:</strong></p>
+                <ul>
+                    <li>HAuCl₄ is highly corrosive - causes severe eye damage</li>
+                    <li>Chemical splash goggles mandatory</li>
+                    <li>Chemical-resistant gloves required</li>
+                    <li>Work under fume hood</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section 5: General Lab Safety -->
+        <div class="content-card" id="section5">
+            <h2>General Laboratory Safety</h2>
+
+            <h3>Pre-Lab Preparation</h3>
+            <div class="checklist">
+                <div class="checklist-item">
+                    <input type="checkbox" id="prep1" aria-label="Read procedure">
+                    <label for="prep1">Read entire procedure before starting</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="prep2" aria-label="Review SDS">
+                    <label for="prep2">Review Safety Data Sheets for all chemicals</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="prep3" aria-label="Check PPE">
+                    <label for="prep3">Verify you have appropriate PPE</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="prep4" aria-label="Inspect equipment">
+                    <label for="prep4">Inspect equipment for damage</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="prep5" aria-label="Know emergency procedures">
+                    <label for="prep5">Know location of emergency equipment</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="prep6" aria-label="Clear workspace">
+                    <label for="prep6">Clear and organize workspace</label>
+                </div>
+            </div>
+
+            <h3>Working in the Laboratory</h3>
+            
+            <div class="info-box">
+                <h4>Best Practices</h4>
+                <ul>
+                    <li><strong>Never work alone</strong> - Always have someone nearby who can help in emergencies</li>
+                    <li><strong>Stay focused</strong> - No eating, drinking, or applying cosmetics in lab</li>
+                    <li><strong>Secure long hair</strong> - Tie back to prevent contact with chemicals or equipment</li>
+                    <li><strong>Remove jewelry</strong> - Rings, bracelets can catch on equipment or conduct electricity</li>
+                    <li><strong>Keep aisles clear</strong> - Ensure emergency exits are accessible</li>
+                    <li><strong>Clean as you go</strong> - Maintain organized, uncluttered workspace</li>
+                    <li><strong>Label everything</strong> - All containers, samples, and materials</li>
+                </ul>
+            </div>
+
+            <h3>Cleanroom Protocols (Lab 1)</h3>
+            
+            <div class="info-box">
+                <h4>Particulate Control</h4>
+                <p>Lab 1 introduces cleanroom concepts. While building a miniature cleanroom is safe, understanding contamination control is important:</p>
+                <ul>
+                    <li>Sawdust/particulates - wear safety goggles to avoid eye irritation</li>
+                    <li>Computer fans - keep fingers away from spinning blades</li>
+                    <li>Cutting cardboard - use appropriate tools, cut away from body</li>
+                    <li>9V battery connections - avoid short circuits</li>
+                </ul>
+            </div>
+
+            <h3>Glassware and Sharp Object Safety</h3>
+            
+            <div class="safety-warning">
+                <h4>Cut Prevention</h4>
+                <p>Multiple labs involve cutting glass slides and working with sharp tools:</p>
+                
+                <p><strong>Glass Cutting (Labs 4, 6, 7, 8):</strong></p>
+                <ul>
+                    <li>Use proper glass cutters and diamond scribes</li>
+                    <li>Score once - do not re-score the same line</li>
+                    <li>Snap away from body</li>
+                    <li>Edges will be sharp - handle carefully</li>
+                    <li>Dispose of broken glass in designated sharps container</li>
+                </ul>
+
+                <p><strong>If Cut Occurs:</strong></p>
+                <ul>
+                    <li>Apply pressure to stop bleeding</li>
+                    <li>Rinse with clean water</li>
+                    <li>Notify instructor immediately</li>
+                    <li>Seek medical attention if cut is deep or won't stop bleeding</li>
+                </ul>
+            </div>
+
+            <h3>Fume Hood Usage</h3>
+            
+            <div class="info-box">
+                <h4>When Fume Hoods Are Required</h4>
+                <p>Fume hoods provide ventilation and containment for chemical vapors:</p>
+                
+                <p><strong>Mandatory for:</strong></p>
+                <ul>
+                    <li>Lab 4 - Plasma generation (free radicals)</li>
+                    <li>Lab 6, 8 - Spin coating with acetone</li>
+                    <li>Lab 7, 8 - Etching with ferric chloride</li>
+                    <li>Lab 9, 10 - Working with HAuCl₄</li>
+                </ul>
+
+                <p><strong>Proper Use:</strong></p>
+                <ul>
+                    <li>Keep sash at recommended height</li>
+                    <li>Work at least 6 inches inside hood</li>
+                    <li>Don't block airflow with equipment</li>
+                    <li>Leave hood running during and after work</li>
+                    <li>Never put head inside while chemicals are present</li>
+                </ul>
+
+                <p><strong>If fume hood unavailable:</strong> Respirator required and work in well-ventilated area with windows open</p>
+            </div>
+        </div>
+
+        <!-- Section 6: Emergency Procedures -->
+        <div class="content-card" id="section6">
+            <h2>Emergency Procedures</h2>
+
+            <div class="safety-critical">
+                <h3>🚨 Emergency Contact Information</h3>
+                <p><strong>Before starting any lab, know the location of:</strong></p>
+                <ul>
+                    <li>Emergency phone and campus security number</li>
+                    <li>Fire alarm pull stations</li>
+                    <li>Emergency exits</li>
+                    <li>Fire extinguishers</li>
+                    <li>Eyewash stations</li>
+                    <li>Safety showers</li>
+                    <li>First aid kit</li>
+                    <li>Spill response kit</li>
+                </ul>
+            </div>
+
+            <h3>Emergency Response by Type</h3>
+
+            <div class="emergency-procedures">
+                <div class="emergency-card">
+                    <h4>🔥 Fire Emergency</h4>
+                    <p><strong>Small fire (contained):</strong></p>
+                    <ol>
+                        <li>Alert others immediately</li>
+                        <li>If trained, use appropriate fire extinguisher</li>
+                        <li>Evacuate if fire spreads</li>
+                    </ol>
+                    
+                    <p><strong>Large fire or spreading:</strong></p>
+                    <ol>
+                        <li>Activate fire alarm</li>
+                        <li>Evacuate immediately</li>
+                        <li>Close doors behind you</li>
+                        <li>Call emergency services (911)</li>
+                        <li>Do NOT re-enter building</li>
+                    </ol>
+
+                    <p><strong>Clothing on fire:</strong></p>
+                    <ul>
+                        <li>STOP, DROP, and ROLL</li>
+                        <li>Use safety shower if available</li>
+                        <li>Smother flames with fire blanket</li>
+                    </ul>
+                </div>
+
+                <div class="emergency-card">
+                    <h4>👁️ Eye Exposure</h4>
+                    <p><strong>Critical - Minutes matter!</strong></p>
+                    <ol>
+                        <li>Immediately go to eyewash station</li>
+                        <li>Hold eyelids open and flush for 15 minutes minimum</li>
+                        <li>Remove contact lenses if possible</li>
+                        <li>Have someone notify instructor/emergency services</li>
+                        <li>Seek medical attention immediately after flushing</li>
+                    </ol>
+
+                    <p><strong>Do NOT:</strong></p>
+                    <ul>
+                        <li>Rub eyes</li>
+                        <li>Use neutralizing solutions</li>
+                        <li>Delay flushing to find instructor</li>
+                    </ul>
+                </div>
+
+                <div class="emergency-card">
+                    <h4>🧴 Chemical Skin Contact</h4>
+                    <p><strong>Immediate action required:</strong></p>
+                    <ol>
+                        <li>Remove contaminated clothing</li>
+                        <li>Flush affected area with water for 15 minutes</li>
+                        <li>Use safety shower for large areas</li>
+                        <li>Notify instructor</li>
+                        <li>Seek medical attention for:</li>
+                        <ul>
+                            <li>Strong acids/bases (HCl, NaOH, H₂SO₄)</li>
+                            <li>Large area exposure</li>
+                            <li>Blistering or severe pain</li>
+                        </ul>
+                    </ol>
+
+                    <p><strong>Special cases:</strong></p>
+                    <ul>
+                        <li>HAuCl₄ - Highly corrosive, flush immediately and seek medical attention</li>
+                        <li>Ferric chloride - Will stain skin, flush thoroughly</li>
+                    </ul>
+                </div>
+
+                <div class="emergency-card">
+                    <h4>🔥 Burn Treatment</h4>
+                    <p><strong>Thermal burns (hot plates, plasma systems):</strong></p>
+                    <ol>
+                        <li>Remove from heat source immediately</li>
+                        <li>Cool burn with cool (not ice cold) running water for 10-15 minutes</li>
+                        <li>Remove jewelry/tight clothing near burn</li>
+                        <li>Cover with sterile, non-stick bandage</li>
+                        <li>Do NOT apply ice, butter, or ointments</li>
+                        <li>Seek medical attention for:</li>
+                        <ul>
+                            <li>Burns larger than 3 inches</li>
+                            <li>Burns on face, hands, feet, genitals</li>
+                            <li>Third-degree burns (white/charred)</li>
+                            <li>Blistering burns</li>
+                        </ul>
+                    </ol>
+                </div>
+
+                <div class="emergency-card">
+                    <h4>⚡ Electrical Shock</h4>
+                    <p><strong>If someone is being shocked:</strong></p>
+                    <ol>
+                        <li>DO NOT TOUCH the person</li>
+                        <li>Turn off power source if safe</li>
+                        <li>If unable to turn off, use non-conductive object to separate person from source</li>
+                        <li>Call 911 immediately</li>
+                        <li>Check breathing and pulse</li>
+                        <li>Begin CPR if trained and needed</li>
+                    </ol>
+
+                    <p><strong>Prevention:</strong></p>
+                    <ul>
+                        <li>Inspect cords before use</li>
+                        <li>Keep electrical equipment away from water</li>
+                        <li>Never use equipment with frayed cords</li>
+                        <li>Unplug by pulling plug, not cord</li>
+                    </ul>
+                </div>
+
+                <div class="emergency-card">
+                    <h4>💨 Inhalation Exposure</h4>
+                    <p><strong>If chemical vapors are inhaled:</strong></p>
+                    <ol>
+                        <li>Move to fresh air immediately</li>
+                        <li>Alert others in area</li>
+                        <li>Loosen tight clothing</li>
+                        <li>Sit upright if breathing is difficult</li>
+                        <li>Notify instructor</li>
+                        <li>Call 911 if:</li>
+                        <ul>
+                            <li>Difficulty breathing persists</li>
+                            <li>Dizziness or confusion</li>
+                            <li>Loss of consciousness</li>
+                        </ul>
+                    </ol>
+
+                    <p><strong>Do NOT:</strong></p>
+                    <ul>
+                        <li>Re-enter contaminated area without protection</li>
+                        <li>Induce vomiting</li>
+                    </ul>
+                </div>
+
+                <div class="emergency-card">
+                    <h4>💥 Glass Implosion/Breakage</h4>
+                    <p><strong>If vacuum flask implodes (Lab 4 risk):</strong></p>
+                    <ol>
+                        <li>Stand back immediately</li>
+                        <li>Turn off all heating/power</li>
+                        <li>Alert instructor</li>
+                        <li>Check for injuries from flying glass</li>
+                        <li>Do NOT clean up - wait for instructor</li>
+                        <li>Ventilate area if chemicals released</li>
+                    </ol>
+
+                    <p><strong>Prevention:</strong></p>
+                    <ul>
+                        <li>Inspect glassware for cracks before use</li>
+                        <li>Follow temperature/pressure limits strictly</li>
+                        <li>Allow proper cooling time</li>
+                        <li>Never exceed 30 seconds microwave time (Lab 4)</li>
+                        <li>Keep pressure below 50 mTorr or above 120 mTorr for plasma</li>
+                    </ul>
+                </div>
+
+                <div class="emergency-card">
+                    <h4>☣️ Chemical Spill Response</h4>
+                    <p><strong>Minor spill (less than 100mL):</strong></p>
+                    <ol>
+                        <li>Alert people in immediate area</li>
+                        <li>Wear appropriate PPE</li>
+                        <li>Contain spill with absorbent materials</li>
+                        <li>Clean up using spill kit</li>
+                        <li>Dispose in appropriate waste container</li>
+                        <li>Notify instructor</li>
+                    </ol>
+
+                    <p><strong>Major spill (>100mL or highly hazardous):</strong></p>
+                    <ol>
+                        <li>Alert everyone in area</li>
+                        <li>Evacuate and close doors</li>
+                        <li>Notify instructor and campus safety</li>
+                        <li>Do NOT attempt cleanup</li>
+                        <li>Wait for trained personnel</li>
+                    </ol>
+
+                    <p><strong>If spill contacts person, treat as skin/eye exposure emergency (see above)</strong></p>
+                </div>
+            </div>
+
+            <h3>Evacuation Procedures</h3>
+            
+            <div class="info-box">
+                <h4>When to Evacuate</h4>
+                <ul>
+                    <li>Fire alarm activation</li>
+                    <li>Gas leak or strong chemical odor</li>
+                    <li>Explosion or structural damage</li>
+                    <li>When instructed by emergency personnel</li>
+                </ul>
+
+                <h4>Evacuation Steps</h4>
+                <ol>
+                    <li>Stop work immediately and safely shut down equipment if time permits</li>
+                    <li>Leave belongings behind</li>
+                    <li>Walk, do not run, to nearest exit</li>
+                    <li>Use stairs, never elevators</li>
+                    <li>Help others if possible</li>
+                    <li>Close doors behind you</li>
+                    <li>Proceed to designated assembly area</li>
+                    <li>Report missing persons to emergency personnel</li>
+                    <li>Do NOT re-enter until authorized</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Section 7: Knowledge Check Quiz -->
+        <div class="content-card" id="section7">
+            <h2>Knowledge Check Quiz</h2>
+
+            <div class="info-box">
+                <p>Test your understanding of the safety protocols covered in this training. Select the best answer for each question.</p>
+            </div>
+
+            <div class="quiz-section">
+                <div class="quiz-question" id="q1">
+                    <h3>Question 1: PPE Requirements</h3>
+                    <p>Which PPE is required for ALL labs in this manual?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false" tabindex="0">A) Chemical-resistant gloves</div>
+                        <div class="quiz-option" data-correct="false" tabindex="0">B) Respirator</div>
+                        <div class="quiz-option" data-correct="true" tabindex="0">C) Safety glasses and closed-toe shoes</div>
+                        <div class="quiz-option" data-correct="false" tabindex="0">D) Lab coat</div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" id="q2">
+                    <h3>Question 2: Plasma Safety</h3>
+                    <p>In Lab 4 (Plasma Technology), what is the maximum safe microwave exposure time?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false" tabindex="0">A) 60 seconds</div>
+                        <div class="quiz-option" data-correct="false" tabindex="0">B) 45 seconds</div>
+                        <div class="quiz-option" data-correct="true" tabindex="0">C) 30 seconds</div>
+                        <div class="quiz-option" data-correct="false" tabindex="0">D) 15 seconds</div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" id="q3">
+                    <h3>Question 3: Chemical Safety</h3>
+                    <p>HAuCl₄ (hydrogen tetrachloroaurate) used in Labs 9 and 10 is particularly hazardous because it:</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false" tabindex="0">A) Is highly flammable</div>
+                        <div class="quiz-option" data-correct="true" tabindex="0">B) Is corrosive and can cause severe eye damage</div>
+                        <div class="quiz-option" data-correct="false" tabindex="0">C) Produces toxic fumes at room temperature</div>
+                        <div class="quiz-option" data-correct="false" tabindex="0">D) Explodes when mixed with water</div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" id="q4">
+                    <h3>Question 4: Eye Exposure Emergency</h3>
+                    <p>If a chemical splashes in your eye, what is the FIRST thing you should do?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false" tabindex="0">A) Find the instructor</div>
+                        <div class="quiz-option" data-correct="false" tabindex="0">B) Try to neutralize the chemical</div>
+                        <div class="quiz-option" data-correct="true" tabindex="0">C) Immediately flush with water at eyewash station for 15 minutes</div>
+                        <div class="quiz-option" data-correct="false" tabindex="0">D) Cover the eye with a bandage</div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" id="q5">
+                    <h3>Question 5: Vacuum System Safety</h3>
+                    <p>What can cause a vacuum flask to implode?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false" tabindex="0">A) Operating at too low a pressure</div>
+                        <div class="quiz-option" data-correct="false" tabindex="0">B) Using the wrong gas</div>
+                        <div class="quiz-option" data-correct="true" tabindex="0">C) Cracks in glass, rapid temperature changes, or exceeding pressure/temperature limits</div>
+                        <div class="quiz-option" data-correct="false" tabindex="0">D) Pumping down too slowly</div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" id="q6">
+                    <h3>Question 6: Fume Hood Usage</h3>
+                    <p>Which labs REQUIRE the use of a fume hood (or respirator if unavailable)?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false" tabindex="0">A) Only Labs 9 and 10</div>
+                        <div class="quiz-option" data-correct="true" tabindex="0">B) Labs 4, 6, 7, 8, 9, and 10</div>
+                        <div class="quiz-option" data-correct="false" tabindex="0">C) All labs in the manual</div>
+                        <div class="quiz-option" data-correct="false" tabindex="0">D) No labs require fume hoods</div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" id="q7">
+                    <h3>Question 7: UV Exposure</h3>
+                    <p>When working with UV exposure systems in Labs 6 and 8, you must:</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false" tabindex="0">A) Wear sunscreen</div>
+                        <div class="quiz-option" data-correct="true" tabindex="0">B) Never look directly at UV light without UV-protecting eyewear</div>
+                        <div class="quiz-option" data-correct="false" tabindex="0">C) Work in complete darkness</div>
+                        <div class="quiz-option" data-correct="false" tabindex="0">D) Limit exposure to 5 minutes maximum</div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" id="q8">
+                    <h3>Question 8: Burn Treatment</h3>
+                    <p>If you receive a thermal burn from a hotplate, you should:</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false" tabindex="0">A) Apply ice directly to the burn</div>
+                        <div class="quiz-option" data-correct="false" tabindex="0">B) Apply butter or ointment immediately</div>
+                        <div class="quiz-option" data-correct="true" tabindex="0">C) Cool with running water for 10-15 minutes, then notify instructor</div>
+                        <div class="quiz-option" data-correct="false" tabindex="0">D) Pop any blisters that form</div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" id="q9">
+                    <h3>Question 9: Chemical Handling</h3>
+                    <p>When should you read the Safety Data Sheet (SDS) for a chemical?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false" tabindex="0">A) Only if something goes wrong</div>
+                        <div class="quiz-option" data-correct="false" tabindex="0">B) After completing the lab</div>
+                        <div class="quiz-option" data-correct="true" tabindex="0">C) Before handling any chemical</div>
+                        <div class="quiz-option" data-correct="false" tabindex="0">D) SDS reading is optional</div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" id="q10">
+                    <h3>Question 10: Emergency Response</h3>
+                    <p>In case of a major chemical spill (>100mL or highly hazardous), you should:</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false" tabindex="0">A) Clean it up quickly before it spreads</div>
+                        <div class="quiz-option" data-correct="true" tabindex="0">B) Alert others, evacuate, close doors, and notify instructor/campus safety</div>
+                        <div class="quiz-option" data-correct="false" tabindex="0">D) Pour water on it to dilute</div>
+                        <div class="quiz-option" data-correct="false" tabindex="0">D) Cover it with paper towels</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="quizResults" style="display: none;" class="completion-badge">
+                <h3>Quiz Results</h3>
+                <p id="scoreText" style="font-size: 1.5em; margin: 20px 0;"></p>
+                <p id="feedbackText"></p>
+            </div>
+        </div>
+
+        <!-- Section 8: Completion -->
+        <div class="content-card" id="section8">
+            <div class="completion-badge">
+                <h3>🎓 Safety Training Complete!</h3>
+                <p style="font-size: 1.2em; margin: 20px 0;">Congratulations! You have completed the Nanotechnology Lab Safety Training.</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Key Takeaways</h3>
+                <ul>
+                    <li><strong>PPE is mandatory</strong> - Always wear appropriate safety glasses, gloves, and protective clothing</li>
+                    <li><strong>Know your chemicals</strong> - Read SDS sheets and understand hazards before starting</li>
+                    <li><strong>Equipment limits matter</strong> - Follow temperature, pressure, and time limits strictly</li>
+                    <li><strong>Minutes matter in emergencies</strong> - Know where safety equipment is located</li>
+                    <li><strong>When in doubt, ask</strong> - Never proceed if you're unsure about safety</li>
+                </ul>
+            </div>
+
+            <h3>Before Each Lab</h3>
+            <div class="checklist">
+                <div class="checklist-item">
+                    <input type="checkbox" id="final1" aria-label="Read entire procedure">
+                    <label for="final1">Read the entire lab procedure</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="final2" aria-label="Review safety disclosure">
+                    <label for="final2">Review the SAFETY DISCLOSURE section</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="final3" aria-label="Verify PPE">
+                    <label for="final3">Verify you have all required PPE</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="final4" aria-label="Inspect equipment">
+                    <label for="final4">Inspect all equipment before use</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="final5" aria-label="Know emergency locations">
+                    <label for="final5">Know locations of emergency equipment</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="final6" aria-label="Ask questions">
+                    <label for="final6">Ask instructor about any concerns</label>
+                </div>
+            </div>
+
+            <div class="safety-critical">
+                <h3>Remember: Safety is Everyone's Responsibility</h3>
+                <p>Your safety and the safety of those around you depends on following proper protocols, staying alert, and speaking up when something doesn't seem right.</p>
+                <p><strong>If you see something unsafe, say something!</strong></p>
+            </div>
+
+            <h3>Lab-Specific Safety Quick Reference</h3>
+            <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                <thead>
+                    <tr style="background: #2c3e50; color: #fff;">
+                        <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Lab</th>
+                        <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Primary Hazards</th>
+                        <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Critical Safety Points</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>Lab 1</strong><br>Cleanrooms</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Particulates, rotating fan, cutting tools</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Safety goggles, keep fingers from fan blades</td>
+                    </tr>
+                    <tr style="background: #f8f9fa;">
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>Lab 2-3</strong><br>Vacuum</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Mechanical, electrical, implosion</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Inspect glassware, two-person lift, no leaning on system</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>Lab 4</strong><br>Plasma</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Extreme heat (750°F+), implosion, inhalation</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">MAX 30 sec exposure, 50mTorr pressure, 5 min cooling, fume hood required</td>
+                    </tr>
+                    <tr style="background: #f8f9fa;">
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>Lab 5</strong><br>Thermal Evap</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Hot surfaces, vacuum</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Heat-resistant gloves, allow cooling time</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>Lab 6</strong><br>Photolithography</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">UV light, chemicals, spinning equipment</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">UV eyewear, fume hood, gloves, no direct UV viewing</td>
+                    </tr>
+                    <tr style="background: #f8f9fa;">
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>Lab 7-8</strong><br>Etching</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Ferric chloride (corrosive), hot plates</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Chemical-resistant gloves, fume hood, instructor dilutes etchant</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>Lab 9-10</strong><br>Electrodeposition</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">HAuCl₄ (highly corrosive), electrical</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Splash goggles, chemical gloves, apron, fume hood, disconnect power before touching electrodes</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="info-box" style="margin-top: 30px;">
+                <h3>Additional Resources</h3>
+                <ul>
+                    <li><strong>Safety Data Sheets (SDS)</strong> - Available for all chemicals used</li>
+                    <li><strong>Lab Instructor</strong> - Always available for questions</li>
+                    <li><strong>Campus Safety Office</strong> - Emergency procedures and training</li>
+                    <li><strong>OSHA Laboratory Safety Guidance</strong> - Federal standards and best practices</li>
+                </ul>
+            </div>
+
+            <p style="text-align: center; font-size: 1.2em; margin-top: 40px; color: #2c3e50;"><strong>Stay safe and enjoy your nanotechnology lab experience!</strong></p>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+            <button class="btn-secondary" id="prevBtn" onclick="changeSection(-1)">← Previous</button>
+            <button class="btn-primary" id="nextBtn" onclick="changeSection(1)">Next →</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSection = 1;
+        const totalSections = 8;
+        let quizAnswered = {};
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+            setupQuiz();
+            setupChecklistInteractions();
+        });
+
+        function changeSection(direction) {
+            const currentCard = document.getElementById(`section${currentSection}`);
+            currentCard.classList.remove('active');
+
+            currentSection += direction;
+
+            // Validate quiz completion before moving to section 8
+            if (currentSection === 8) {
+                const quizComplete = checkQuizCompletion();
+                if (!quizComplete) {
+                    alert('Please complete the knowledge check quiz before proceeding to the completion section.');
+                    currentSection = 7;
+                }
+            }
+
+            const nextCard = document.getElementById(`section${currentSection}`);
+            nextCard.classList.add('active');
+
+            updateProgress();
+            updateButtons();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateProgress() {
+            const progress = (currentSection / totalSections) * 100;
+            const progressFill = document.getElementById('progressFill');
+            progressFill.style.width = progress + '%';
+            progressFill.textContent = Math.round(progress) + '%';
+            progressFill.setAttribute('aria-valuenow', progress);
+        }
+
+        function updateButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+
+            prevBtn.disabled = currentSection === 1;
+            
+            if (currentSection === totalSections) {
+                nextBtn.textContent = 'Complete Training ✓';
+                nextBtn.onclick = function() {
+                    alert('Congratulations! You have completed the safety training. Please consult with your instructor about any additional requirements.');
+                };
+            } else {
+                nextBtn.textContent = 'Next →';
+                nextBtn.onclick = function() { changeSection(1); };
+            }
+        }
+
+        function setupChecklistInteractions() {
+            const checkboxes = document.querySelectorAll('.checklist-item input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const item = this.closest('.checklist-item');
+                    if (this.checked) {
+                        item.classList.add('checked');
+                    } else {
+                        item.classList.remove('checked');
+                    }
+                });
+            });
+
+            // Make checklist items clickable
+            const items = document.querySelectorAll('.checklist-item');
+            items.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    if (e.target.tagName !== 'INPUT') {
+                        const checkbox = this.querySelector('input[type="checkbox"]');
+                        checkbox.checked = !checkbox.checked;
+                        checkbox.dispatchEvent(new Event('change'));
+                    }
+                });
+
+                // Keyboard accessibility
+                item.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        const checkbox = this.querySelector('input[type="checkbox"]');
+                        checkbox.checked = !checkbox.checked;
+                        checkbox.dispatchEvent(new Event('change'));
+                    }
+                });
+            });
+        }
+
+        function setupQuiz() {
+            const options = document.querySelectorAll('.quiz-option');
+            
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    handleQuizAnswer(this);
+                });
+
+                option.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleQuizAnswer(this);
+                    }
+                });
+            });
+        }
+
+        function handleQuizAnswer(option) {
+            const question = option.closest('.quiz-question');
+            const questionId = question.id;
+            const allOptions = question.querySelectorAll('.quiz-option');
+            
+            // Check if already answered
+            if (quizAnswered[questionId]) {
+                return;
+            }
+
+            // Mark as answered
+            quizAnswered[questionId] = true;
+
+            // Show correct/incorrect
+            const isCorrect = option.dataset.correct === 'true';
+            
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+                if (opt.dataset.correct === 'true') {
+                    opt.classList.add('correct');
+                } else if (opt === option && !isCorrect) {
+                    opt.classList.add('incorrect');
+                }
+            });
+
+            // Check if all questions answered
+            if (Object.keys(quizAnswered).length === 10) {
+                showQuizResults();
+            }
+        }
+
+        function checkQuizCompletion() {
+            return Object.keys(quizAnswered).length === 10;
+        }
+
+        function showQuizResults() {
+            let correctCount = 0;
+            
+            for (let i = 1; i <= 10; i++) {
+                const question = document.getElementById(`q${i}`);
+                const selectedOption = question.querySelector('.quiz-option.correct:not(.incorrect), .quiz-option.incorrect');
+                if (selectedOption && selectedOption.classList.contains('correct') && !selectedOption.classList.contains('incorrect')) {
+                    correctCount++;
+                }
+            }
+
+            const percentage = (correctCount / 10) * 100;
+            const resultsDiv = document.getElementById('quizResults');
+            const scoreText = document.getElementById('scoreText');
+            const feedbackText = document.getElementById('feedbackText');
+
+            scoreText.textContent = `Score: ${correctCount}/10 (${percentage}%)`;
+
+            if (percentage >= 90) {
+                feedbackText.textContent = '🌟 Excellent! You have a strong understanding of laboratory safety protocols.';
+            } else if (percentage >= 80) {
+                feedbackText.textContent = '✅ Good job! Review the areas you missed to strengthen your safety knowledge.';
+            } else if (percentage >= 70) {
+                feedbackText.textContent = '⚠️ Passing, but please review the material carefully. Safety knowledge is critical.';
+            } else {
+                feedbackText.textContent = '❌ Please review the training material and retake the quiz. Your safety depends on this knowledge.';
+            }
+
+            resultsDiv.style.display = 'block';
+            resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // PPE item interactions
+        document.querySelectorAll('.ppe-item').forEach(item => {
+            item.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    this.style.transform = 'scale(1.02)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 200);
+                }
+            });
+        });
+
+        // Initialize buttons
+        updateButtons();
+    </script>
+</body>
+</html>

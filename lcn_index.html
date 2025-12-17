@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Low-Cost Nanotechnology Laboratory Manual</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #fff;
+            padding: 60px 40px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header .subtitle {
+            font-size: 1.4em;
+            opacity: 0.95;
+            margin-bottom: 10px;
+        }
+
+        header .meta {
+            font-size: 1.1em;
+            opacity: 0.85;
+            margin-top: 20px;
+        }
+
+        .intro-section {
+            background: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .intro-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 2em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .intro-section p {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .highlight-box {
+            background: #f0f4ff;
+            border-left: 5px solid #667eea;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .highlight-box h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .stat-card .number {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .stat-card .label {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .lab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .lab-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            border-top: 5px solid #667eea;
+        }
+
+        .lab-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .lab-card.safety {
+            border-top-color: #dc3545;
+        }
+
+        .lab-card .lab-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .lab-card.safety .lab-number {
+            background: #dc3545;
+        }
+
+        .lab-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .lab-card p {
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .lab-meta {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+            font-size: 0.9em;
+            color: #777;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .lab-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .lab-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .lab-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .lab-link.coming-soon {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+
+        .lab-link.coming-soon:hover {
+            transform: none;
+        }
+
+        .resources-section {
+            background: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .resources-section h2 {
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-size: 2em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .resource-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .resource-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .resource-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .resource-card li {
+            padding: 8px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .resource-card li:last-child {
+            border-bottom: none;
+        }
+
+        .resource-card a {
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .resource-card a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        footer {
+            background: rgba(255,255,255,0.95);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        footer p {
+            color: #555;
+            margin: 10px 0;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #28a745;
+            color: #fff;
+            padding: 5px 12px;
+            border-radius: 5px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .badge.coming {
+            background: #ffc107;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .lab-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .icon {
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔬 Low-Cost Nanotechnology Laboratory Manual</h1>
+            <p class="subtitle">Accessible Hands-On Training for Nanotechnology Education</p>
+            <p class="meta">Volume 1 | NSF DUE 2301137</p>
+            <p class="meta">Treylor E. Shirley, M.S. | Zachary R. Gray, PhD | Amy Xin, PhD</p>
+        </header>
+
+        <div class="intro-section">
+            <h2>Welcome to Low-Cost Nanotechnology</h2>
+            <p>This comprehensive lab manual was developed through NSF ATE DUE 2301137 as a free resource for educators integrating hands-on activities into their nanotechnology and semiconductor manufacturing technology programs.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="number">10</div>
+                    <div class="label">Hands-On Labs</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">&lt;$10K</div>
+                    <div class="label">Total Budget</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">100%</div>
+                    <div class="label">Free Resource</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">Modular</div>
+                    <div class="label">Pick & Choose</div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h3>Why Low-Cost Nanotechnology?</h3>
+                <p>The semiconductor industry accounted for over half a trillion USD in value in 2024, creating tremendous job opportunities worldwide. However, the high barrier to entry for nanotechnology education has prevented many institutions and students from accessing this field. This manual changes that by providing complete laboratory experiences for under $10,000 total.</p>
+                <p><strong>All experiments in this manual are designed to be as representative as possible of real industry processes while remaining budget-friendly and accessible.</strong></p>
+            </div>
+        </div>
+
+        <div class="intro-section">
+            <h2>🎓 Getting Started</h2>
+            <p><strong>Before beginning any laboratory work, all students must complete Lab 0: Safety Training.</strong></p>
+            
+            <div class="lab-card safety">
+                <div class="lab-number">0</div>
+                <h3>Lab 0: Nanotechnology Safety Protocols</h3>
+                <p>Essential safety training covering PPE requirements, chemical safety, equipment-specific hazards, emergency procedures, and general laboratory best practices. This comprehensive module must be completed before starting any hands-on work.</p>
+                
+                <div class="lab-meta">
+                    <span>⏱️ Time: 45-60 minutes</span>
+                    <span>📋 Includes: Interactive quiz</span>
+                    <span>✅ Status: Required</span>
+                </div>
+                
+                <a href="Lab 0: Nanotechnology Safety Protocols.html" class="lab-link">Start Safety Training →</a>
+            </div>
+        </div>
+
+        <div class="intro-section">
+            <h2>📚 Laboratory Experiments</h2>
+            <p>The labs are not cumulative and can be used in a pick-and-choose format based on your course design. Each lab includes pre-lab reading, detailed objectives, background theory, step-by-step procedures, and assessment questions.</p>
+        </div>
+
+        <div class="lab-grid">
+            <!-- Lab 1 -->
+            <div class="lab-card">
+                <div class="lab-number">1</div>
+                <h3>Introduction to Cleanrooms</h3>
+                <p>Build a mini-cleanroom to visualize particulate control using a fan, viewport, and sawdust. Learn why cleanrooms are essential for semiconductor manufacturing.</p>
+                
+                <div class="lab-meta">
+                    <span>💰 Cost: ~$20</span>
+                    <span>⏱️ Time: 45-50 min</span>
+                    <span>🔑 Key: Particulate control</span>
+                </div>
+
+                <p><strong>Key Supplies:</strong> Cardboard box, 9V battery, computer fan</p>
+                
+                <a href="#" class="lab-link coming-soon">Coming Soon</a>
+            </div>
+
+            <!-- Lab 2 -->
+            <div class="lab-card">
+                <div class="lab-number">2</div>
+                <h3>Vacuum Assembly and Troubleshooting</h3>
+                <p>Learn vacuum design fundamentals by assembling the Kurt J Lesker vacuum trainer from start to finish. Practice troubleshooting leak detection and system optimization.</p>
+                
+                <div class="lab-meta">
+                    <span>💰 Cost: ~$5,500</span>
+                    <span>⏱️ Time: 1 hour</span>
+                    <span>🔑 Key: Vacuum systems</span>
+                </div>
+
+                <p><strong>Key Supplies:</strong> Kurt J Lesker low-cost vacuum trainer</p>
+                
+                <a href="#" class="lab-link coming-soon">Coming Soon</a>
+            </div>
+
+            <!-- Lab 3 -->
+            <div class="lab-card">
+                <div class="lab-number">3</div>
+                <h3>Vacuum Concepts</h3>
+                <p>Conduct hands-on experiments to understand mean free path, vapor pressure, and pressure gradients using the vacuum trainer. Explore why vacuum is essential in nanofabrication.</p>
+                
+                <div class="lab-meta">
+                    <span>💰 Cost: $0 extra</span>
+                    <span>⏱️ Time: 45-50 min</span>
+                    <span>🔑 Key: MFP, vapor pressure</span>
+                </div>
+
+                <p><strong>Key Supplies:</strong> Kurt J Lesker vacuum trainer, lab glassware, incense</p>
+                
+                <a href="#" class="lab-link coming-soon">Coming Soon</a>
+            </div>
+
+            <!-- Lab 4 -->
+            <div class="lab-card">
+                <div class="lab-number">4</div>
+                <h3>Plasma Technology</h3>
+                <p>Create a plasma environment using a household microwave and vacuum system. Perform surface modification experiments and wetting studies to demonstrate plasma capabilities.</p>
+                
+                <div class="lab-meta">
+                    <span>💰 Cost: ~$100 extra</span>
+                    <span>⏱️ Time: 45-50 min</span>
+                    <span>🔑 Key: Plasma, surface mod</span>
+                </div>
+
+                <p><strong>Key Supplies:</strong> Vacuum trainer, microwave, flask with stop valve</p>
+                
+                <a href="#" class="lab-link coming-soon">Coming Soon</a>
+            </div>
+
+            <!-- Lab 5 -->
+            <div class="lab-card">
+                <div class="lab-number">5</div>
+                <h3>Thermal Evaporation</h3>
+                <p>Observe vacuum-based thin film deposition using low melting point wax to simulate metal evaporation. Learn about metallization processes used in industry.</p>
+                
+                <div class="lab-meta">
+                    <span>💰 Cost: ~$50-200 extra</span>
+                    <span>⏱️ Time: 1 hour</span>
+                    <span>🔑 Key: PVD, thin films</span>
+                </div>
+
+                <p><strong>Key Supplies:</strong> Vacuum trainer, mug warmer, USB battery, wax beads</p>
+                
+                <a href="#" class="lab-link coming-soon">Coming Soon</a>
+            </div>
+
+            <!-- Lab 6 -->
+            <div class="lab-card">
+                <div class="lab-number">6</div>
+                <h3>Photolithography</h3>
+                <p>Create photomasks and transfer patterns into UV-sensitive nail polish. Learn the fundamentals of the most critical process in semiconductor manufacturing.</p>
+                
+                <div class="lab-meta">
+                    <span>💰 Cost: ~$200</span>
+                    <span>⏱️ Time: 50 min</span>
+                    <span>🔑 Key: Pattern transfer</span>
+                </div>
+
+                <p><strong>Key Supplies:</strong> UV-curing nail polish, UV curing station, hotplate</p>
+                
+                <a href="#" class="lab-link coming-soon">Coming Soon</a>
+            </div>
+
+            <!-- Lab 7 -->
+            <div class="lab-card">
+                <div class="lab-number">7</div>
+                <h3>Wet Etching</h3>
+                <p>Demonstrate wet etching fundamentals using ferric chloride to etch aluminum substrates. Learn about etch selectivity and masking techniques.</p>
+                
+                <div class="lab-meta">
+                    <span>💰 Cost: ~$150</span>
+                    <span>⏱️ Time: 45-50 min</span>
+                    <span>🔑 Key: Material removal</span>
+                </div>
+
+                <p><strong>Key Supplies:</strong> Ferric chloride, hotplate, glassware, aluminum</p>
+                
+                <a href="#" class="lab-link coming-soon">Coming Soon</a>
+            </div>
+
+            <!-- Lab 8 -->
+            <div class="lab-card">
+                <div class="lab-number">8</div>
+                <h3>Pattern Transfer</h3>
+                <p>Combine photolithography and etching to permanently transfer patterns into aluminum discs. Experience the complete nanofabrication process flow.</p>
+                
+                <div class="lab-meta">
+                    <span>💰 Cost: ~$300 total</span>
+                    <span>⏱️ Time: 50 min + soak</span>
+                    <span>🔑 Key: Integration</span>
+                </div>
+
+                <p><strong>Key Supplies:</strong> Aluminum disks, nail polish, ferric chloride, UV system</p>
+                
+                <a href="#" class="lab-link coming-soon">Coming Soon</a>
+            </div>
+
+            <!-- Lab 9 -->
+            <div class="lab-card">
+                <div class="lab-number">9</div>
+                <h3>Gold Electrodeposition</h3>
+                <p>Perform electrochemical deposition of gold onto conductive glass substrates. Observe optical property changes as film thickness increases.</p>
+                
+                <div class="lab-meta">
+                    <span>💰 Cost: ~$500</span>
+                    <span>⏱️ Time: 2 hours</span>
+                    <span>🔑 Key: Electrochemistry</span>
+                </div>
+
+                <p><strong>Key Supplies:</strong> Graphite electrode, FTO substrates, HAuCl₄</p>
+                
+                <a href="#" class="lab-link coming-soon">Coming Soon</a>
+            </div>
+
+            <!-- Lab 10 -->
+            <div class="lab-card">
+                <div class="lab-number">10</div>
+                <h3>Layer-by-Layer Deposition of Gold Nanoparticles</h3>
+                <p>Build multilayered nanostructures through electrostatic self-assembly. Learn about bottom-up nanotechnology approaches and nanomaterial synthesis.</p>
+                
+                <div class="lab-meta">
+                    <span>💰 Cost: ~$100</span>
+                    <span>⏱️ Time: 50 min</span>
+                    <span>🔑 Key: Self-assembly, LBL</span>
+                </div>
+
+                <p><strong>Key Supplies:</strong> Microscope slides, HAuCl₄, PDDA, sodium citrate</p>
+                
+                <a href="#" class="lab-link coming-soon">Coming Soon</a>
+            </div>
+        </div>
+
+        <div class="resources-section">
+            <h2>📖 Additional Resources</h2>
+            
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <h3>Documentation</h3>
+                    <ul>
+                        <li><a href="#">📄 Complete Lab Manual PDF</a></li>
+                        <li><a href="#">📋 Instructor Guide</a></li>
+                        <li><a href="#">📖 Glossary of Terms</a></li>
+                        <li><a href="#">🔗 Equipment Links & Suppliers</a></li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Safety Resources</h3>
+                    <ul>
+                        <li><a href="Lab 0: Nanotechnology Safety Protocols.html">✅ Lab 0: Safety Training (Required)</a></li>
+                        <li><a href="#">📋 Safety Data Sheets (SDS)</a></li>
+                        <li><a href="#">⚠️ Lab-Specific Safety Guides</a></li>
+                        <li><a href="#">🚨 Emergency Procedures</a></li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Virtual Resources</h3>
+                    <ul>
+                        <li><a href="https://bit.ly/VRCleanroom" target="_blank">🥽 Cornell VR Cleanroom Tour</a></li>
+                        <li><a href="#">🎥 Lab Demonstration Videos</a></li>
+                        <li><a href="#">💻 Virtual Lab Simulations</a></li>
+                        <li><a href="#">📊 Data Analysis Templates</a></li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Educator Support</h3>
+                    <ul>
+                        <li><a href="#">👨‍🏫 Teaching Strategies</a></li>
+                        <li><a href="#">✏️ Assessment Rubrics</a></li>
+                        <li><a href="#">🔄 Lab Adaptation Guide</a></li>
+                        <li><a href="#">💬 Educator Community Forum</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <h3>About This Project</h3>
+            <p>This lab manual was developed through NSF ATE DUE 2301137 as a free educational resource.</p>
+            <p><strong>Authors:</strong> Treylor E. Shirley, M.S. | Zachary R. Gray, PhD | Amy Xin, PhD</p>
+            <p style="margin-top: 20px; font-size: 0.9em; color: #777;">
+                © 2024 Low-Cost Nanotechnology Project | All rights reserved<br>
+                This material is based upon work supported by the National Science Foundation
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
